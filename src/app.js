@@ -21,10 +21,11 @@ app.use("/" , authRouter);
 app.use("/" , eventRouter);
 app.use("/" , profileRouter);
 
+const PORT = process.env.PORT || 3001
 connectDB()
 .then(() => {
   console.log("Database connected successfully");
-  app.listen(3001, '0.0.0.0', () => console.log("Server running on port 3001"));
+  app.listen(PORT, '0.0.0.0', () => console.log("Server running on port ${PORT}"));
 })
 .catch((e) => {
   console.log(e)

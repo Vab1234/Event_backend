@@ -6,7 +6,7 @@ const {connectDB} = require("./config/database");
 
 const app = express();
 app.use(cors({
-  origin : ["https://loquacious-pothos-34be6f.netlify.app", "http://localhost:5173"],
+  origin : ["https://gilded-cobbler-e599f9.netlify.app", "http://localhost:5173"],
   credentials : true
 }));
 app.use(express.json());
@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 3001
 connectDB()
 .then(() => {
   console.log("Database connected successfully");
-  app.listen(PORT, '0.0.0.0', () => console.log("Server running on port ${PORT}"));
+  app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
 })
 .catch((e) => {
   console.log(e)

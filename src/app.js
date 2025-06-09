@@ -6,7 +6,7 @@ const {connectDB} = require("./config/database");
 
 const app = express();
 app.use(cors({
-  origin : ["https://gilded-cobbler-e599f9.netlify.app", "http://localhost:5173"],
+  origin : ["https://gilded-cobbler-e599f9.netlify.app", "http://localhost:5173" , "https://pwa-3qil.vercel.app"],
   credentials : true
 }));
 app.use(express.json());

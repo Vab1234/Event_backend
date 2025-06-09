@@ -23,11 +23,12 @@ authRouter.post("/login", async (req, res) => {
         }
         const token = jwt.sign({ userId: user._id, email: user.email }, SECRET);
         console.log(user.name + " Logged in")
-        res.cookie("token" , token , {
-          sameSite : 'None',
-          secure : true
-        })
-        res.send(user);
+        // res.cookie("token" , token , {
+        //   httpOnly : true,
+        //   sameSite : 'None',
+        //   secure : true
+        // })
+        res.send({user , token});
     }       
     catch(e){
         console.log(e)

@@ -8,9 +8,9 @@ const eventRouter = express.Router();
 
 eventRouter.post("/event/create", async (req, res) => {
   try {
-    const { name, date } = req.body;
+    const { name, date , location} = req.body;
 
-    const event = await Event.create({ name, date });
+    const event = await Event.create({ name, date, location});
 
     const qr = await generateQR(event._id.toString());
 
@@ -94,6 +94,22 @@ eventRouter.post("/event/mark-attendance-via-qr", authMiddleware, async (req, re
   } catch (e) {
     console.error("Error marking attendance:", e);
     res.status(500).send("Internal Server Error");
+  }
+});
+
+eventRouter.get("/event/map", async (req, res) => {
+  try {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // set to today's 00:00:00 for accurate filtering
+
+    const events = await Event.find({
+      date: { $gte: today }
+    }).sort({ date: 1 }); // optional: sort by upcoming date
+
+    res.json(events);
+  } catch (error) {
+    console.error("Failed to fetch events:", error);
+    res.status(500).send("Server error");
   }
 });
 
